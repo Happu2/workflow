@@ -7,6 +7,10 @@ __pycache__/
 # Env
 .env
 
+# Config
+config.yaml
+
 # Node
 node_modules/
 dist/
+
