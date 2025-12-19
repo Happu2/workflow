@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from dotenv import load_dotenv
 
 from api.chat import router as chat_router
 from api.pdf import router as pdf_router
@@ -10,7 +9,6 @@ from api.auth import router as auth_router
 from db.database import engine
 from db import models
 
-load_dotenv()
 
 # Create database tables
 models.Base.metadata.create_all(bind=engine)

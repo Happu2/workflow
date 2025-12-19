@@ -2,10 +2,7 @@ import os
 from openai import OpenAI
 from google import genai
 from typing import Generator
-from dotenv import load_dotenv
 
-# Load environment variables
-load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '..', '.env'))
 
 openai_api_key = os.getenv("OPENAI_API_KEY")
 if openai_api_key and openai_api_key != "your_openai_key":
