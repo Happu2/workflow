@@ -33,9 +33,10 @@ A no-code/low-code web application for creating intelligent workflows using drag
 
 1. Clone the repository and navigate to the project directory
 2. Copy environment file: `cp backend/.env.example backend/.env`
-3. Edit `backend/.env` with your API keys
-4. Run: `docker-compose up --build`
-5. Access the application at http://localhost:5175
+3. Edit `backend/.env` with your API keys (see below for required keys)
+4. Do not mount `./backend:/app` as a volume in docker-compose.yml (this will break .env loading)
+5. Run: `docker-compose up --build`
+6. Access the application at http://localhost:5175
 
 ### Manual Setup
 
@@ -158,8 +159,9 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for detailed system architecture and data
 ## Configuration
 
 ### Environment Variables
-```bash
-# Required API Keys
+```
+# Place this file as backend/.env (not in the root directory)
+# Docker Compose will load it automatically for the backend service
 OPENAI_API_KEY=your_openai_key
 GEMINI_API_KEY=your_gemini_key
 SERP_API_KEY=your_serpapi_key
@@ -171,6 +173,8 @@ DATABASE_URL=postgresql://user:pass@host:5432/db
 SECRET_KEY=your-secret-key
 ACCESS_TOKEN_EXPIRE_MINUTES=30
 ```
+
+For the frontend, only add a frontend/.env if you need to expose keys to the browser (must use VITE_ prefix, e.g. VITE_GEMINI_API_KEY).
 
 ## Development
 
@@ -210,6 +214,7 @@ cd frontend && npm test
 
 2. **API Key Errors**
    - Verify API keys in backend/.env
+   - Do not mount `./backend:/app` as a volume in docker-compose.yml (this will overwrite the .env file)
    - Check API key validity and quotas
 
 3. **CORS Errors**
